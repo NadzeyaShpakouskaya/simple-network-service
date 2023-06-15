@@ -4,6 +4,12 @@ The repo contains a Swift Package with the implementation of the HTTP network se
 
 ⚠️ The Network service is under active development.
 
+## Table of contents
+
+* [General info](#general-info)
+* [Installation](#installation)
+* [Authors](#authors)
+
 ## Current dev environment 
 
 | Dev environment| Ref link |
@@ -15,12 +21,6 @@ The repo contains a Swift Package with the implementation of the HTTP network se
 | ![SwiftFormat](https://img.shields.io/badge/SwiftFormat-0.51.7-yellow) | [Link](https://github.com/nicklockwood/SwiftFormat) |
 | ![SwiftLint](https://img.shields.io/badge/SwiftLint-0.51.0-green)| [Link](https://github.com/realm/SwiftLint) |
 
-## Table of contents
-
-* [General info](#general-info)
-* [Installation](#installation)
-* [Authors](#authors)
-
 ## General info
 
 The repo contains the source code of the NetworkService.
@@ -29,7 +29,27 @@ The repo contains the source code of the NetworkService.
 
 **Pre-requisites**: _installed Xcode with the version specified under the [current dev environment](#current-dev-environment)._
 
-1.
+[Swift Package Manager(SPM)](https://www.swift.org/package-manager/) is Apple's dependency manager tool.
+
+To install Network Service package into your packages, add a reference to Network Service and a targeting release version in the dependencies section in Package.swift file:
+
+import PackageDescription
+
+``` swift
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    products: [],
+    dependencies: [
+        .package(url: "https://github.com/ios-course/simple-network-service.git", from: "0.1.0")
+    ]
+)
+```
+
+To install Network Service package via Xcode
+
+Go to File -> Swift Packages -> Add Package Dependency...
+Then search for https://github.com/ios-course/simple-network-service.git
+And choose the version you want
 
 ## Authors
 
