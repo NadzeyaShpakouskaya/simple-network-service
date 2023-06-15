@@ -1,8 +1,4 @@
-final class NetworkService {
-    /// Stub method to check possibility to use this NetworkService in your App.
-    ///
-    ///  - Returns: true
-    func use() -> Bool {
-        return true
-    }
+final public class NetworkService {
+    /// A test method that does nothing. You can use the current method to check the availability of the API in your module.
+    func testUse() {}
 }
