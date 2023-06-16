@@ -31,25 +31,10 @@ The repo contains the source code of the NetworkService.
 
 [Swift Package Manager(SPM)](https://www.swift.org/package-manager/) is Apple's dependency manager tool.
 
-To install Network Service package into your packages, add a reference to Network Service and a targeting release version in the dependencies section in Package.swift file:
-
-import PackageDescription
-
-``` swift
-let package = Package(
-    name: "YOUR_PROJECT_NAME",
-    products: [],
-    dependencies: [
-        .package(url: "https://github.com/ios-course/simple-network-service.git", from: "0.1.0")
-    ]
-)
-```
-
 To install Network Service package via Xcode
 
 Go to File -> Swift Packages -> Add Package Dependency...
 Then search for https://github.com/ios-course/simple-network-service.git
-And choose the version you want
 
 ## Authors
 
