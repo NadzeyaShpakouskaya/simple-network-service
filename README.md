@@ -29,12 +29,12 @@ The repo contains the source code of the NetworkService.
 
 **Pre-requisites**: _installed Xcode with the version specified under the [current dev environment](#current-dev-environment)._
 
-[Swift Package Manager(SPM)](https://www.swift.org/package-manager/) is Apple's dependency manager tool.
-
 To install Network Service package via Xcode
 
-Go to File -> Swift Packages -> Add Package Dependency...
-Then search for https://github.com/ios-course/simple-network-service.git
+1. Go to File -> Add Packages...
+1. Then search for https://github.com/ios-course/simple-network-service.git
+1. Click Add Package
+1. Leave default settings
 
 ## Authors
 
