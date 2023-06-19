@@ -1,7 +1,6 @@
 # macOS environment
 .DS_Store
+
 # Xcode artifacts
 /.build
-/Packages
-/*.xcodeproj
 xcuserdata/
