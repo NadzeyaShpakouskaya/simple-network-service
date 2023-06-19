@@ -2,5 +2,7 @@
 .DS_Store
 
 # Xcode artifacts
-/.build
 xcuserdata/
+
+# SPM artifacts
+/.build
