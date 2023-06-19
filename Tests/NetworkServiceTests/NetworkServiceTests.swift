@@ -1,5 +1,5 @@
 import XCTest
-@testable import NetworkService
+import NetworkService
 
 final class NetworkServiceTests: XCTestCase {
     func testMethodExistsInAPI() {
