@@ -2,21 +2,29 @@
 
 import PackageDescription
 
+private let packageName = "SimpleNetworkService"
+private let packageTestName = "SimpleNetworkServiceTests"
+
 let package = Package(
-    name: "SimpleNetworkService",
-    platforms: [.iOS(.v15)],
+    name: packageName,
+    platforms: [
+        .iOS(.v15)
+    ],
     products: [
         .library(
-            name: "SimpleNetworkService",
-            targets: ["SimpleNetworkService"]),
+            name: packageName,
+            targets: [packageName]
+        )
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "SimpleNetworkService",
-            dependencies: []),
+            name: packageName,
+            dependencies: []
+        ),
         .testTarget(
-            name: "SimpleNetworkServiceTests",
-            dependencies: ["SimpleNetworkService"]),
+            name: packageTestName,
+            dependencies: [.byName(name: packageName)]
+        )
     ]
 )
