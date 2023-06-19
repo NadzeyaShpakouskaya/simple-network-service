@@ -1,5 +1,5 @@
 /// A stub object for future use as a network layer.
-final public class NetworkService {
+final public class SimpleNetworkService {
     /// Custom initializer
     public init() {}
     

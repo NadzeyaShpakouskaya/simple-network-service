@@ -1,23 +1,22 @@
 // swift-tools-version: 5.8
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "NetworkService",
+    name: "SimpleNetworkService",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "NetworkService",
-            targets: ["NetworkService"]),
+            name: "SimpleNetworkService",
+            targets: ["SimpleNetworkService"]),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "NetworkService",
+            name: "SimpleNetworkService",
             dependencies: []),
         .testTarget(
-            name: "NetworkServiceTests",
-            dependencies: ["NetworkService"]),
+            name: "SimpleNetworkServiceTests",
+            dependencies: ["SimpleNetworkService"]),
     ]
 )
