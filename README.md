@@ -36,4 +36,4 @@ You can contact the authors by the following GitHub's usernames:
 
 ## License
 
-[MIT License](https://opensource.org/license/mit/)
+[MIT License](https://github.com/ios-course/simple-network-service/blob/feature-120-Create-SPM-package-for-network-layer/LICENSE)
