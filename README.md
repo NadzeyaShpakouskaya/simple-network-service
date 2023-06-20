@@ -13,7 +13,7 @@ The repo contains a Swift Package with the implementation of the HTTP network se
 
 ## Installation
 
-**Pre-requisites**: _installed Xcode with the version with the version 14.3+._
+**Pre-requisites**: _installed Xcode with the version 14.3+._
 
 Follow the [documentation](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) using the repository address `https://github.com/ios-course/simple-network-service.git`
 
