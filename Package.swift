@@ -4,7 +4,7 @@ import PackageDescription
 
 private let packageName = "SimpleNetworkService"
 private let networkServiceTargetName = "NetworkService"
-private let networkServiceTest = "NetworkServiceTests"
+private let networkServiceTest = "\(networkServiceTargetName)Tests"
 
 let package = Package(
     name: packageName,
