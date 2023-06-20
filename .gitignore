@@ -1,0 +1,8 @@
+# macOS environment
+.DS_Store
+
+# Xcode artifacts
+xcuserdata/
+
+# SPM artifacts
+/.build
