@@ -30,4 +30,4 @@ You can contact the authors by the following GitHub's usernames:
 
 ## License
 
-[License](./LICENSE)
+See the [LICENSE](LICENSE) file.
