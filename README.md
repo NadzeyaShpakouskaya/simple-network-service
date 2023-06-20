@@ -4,7 +4,7 @@ The repo contains a Swift Package with the implementation of the HTTP network se
 
 ⚠️ The Simple Network Service is under active development.
 
-![macOS](https://img.shields.io/badge/macOS-13.3+-blue) ![Xcode](https://img.shields.io/badge/Xcode-14.3+-red)  ![Swift](https://img.shields.io/badge/Swift-5.8-orange) ![iOS](https://img.shields.io/badge/iOS-15%2B-lightgrey)
+![macOS](https://img.shields.io/badge/macOS-13.3+-blue) ![Xcode](https://img.shields.io/badge/Xcode-14.3+-red) ![Swift](https://img.shields.io/badge/Swift-5.8-orange) ![iOS](https://img.shields.io/badge/iOS-15%2B-lightgrey)
 
 ## Table of contents
 
@@ -30,4 +30,4 @@ You can contact the authors by the following GitHub's usernames:
 
 ## License
 
-[MIT License](https://github.com/ios-course/simple-network-service/blob/main/LICENSE)
+[MIT License](./LICENSE)
