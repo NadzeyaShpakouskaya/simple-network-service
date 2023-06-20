@@ -3,7 +3,8 @@
 import PackageDescription
 
 private let packageName = "SimpleNetworkService"
-private let packageTestName = "SimpleNetworkServiceTests"
+private let networkService = "NetworkService"
+private let networkServiceTest = networkService + "Tests"
 
 let package = Package(
     name: packageName,
@@ -12,19 +13,19 @@ let package = Package(
     ],
     products: [
         .library(
-            name: packageName,
-            targets: [packageName]
+            name: networkService,
+            targets: [networkService]
         )
     ],
     dependencies: [],
     targets: [
         .target(
-            name: packageName,
+            name: networkService,
             dependencies: []
         ),
         .testTarget(
-            name: packageTestName,
-            dependencies: [.byName(name: packageName)]
+            name: networkServiceTest,
+            dependencies: [.target(name: networkService)]
         )
     ]
 )
