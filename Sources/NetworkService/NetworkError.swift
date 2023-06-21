@@ -34,7 +34,7 @@ public enum NetworkError: Error, Codable, CaseIterable {
     case requestTimeOut
     
     /// Indicates, that the client's session has expired and must log in again.
-    case LoginTimeOut
+    case loginTimeOut
     
     /// Indicates, that the Uniform Resource Locator is invalid.
     case invalidURL
