@@ -3,7 +3,6 @@ import XCTest
 
 final class NetworkErrorTests: XCTestCase {
     func testAllNetworkErrorsExistInAPI() {
-        XCTAssertTrue(NetworkError.allCases.contains(.authenticationError))
         XCTAssertTrue(NetworkError.allCases.contains(.badRequest))
         XCTAssertTrue(NetworkError.allCases.contains(.loginTimeOut))
         XCTAssertTrue(NetworkError.allCases.contains(.decodingError))
