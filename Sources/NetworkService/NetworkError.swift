@@ -1,6 +1,6 @@
 import Foundation
 
-/// A role of a user in the app's session. A user can have one active role.
+/// Contains network errors that may occur, while the application is running.
 public enum NetworkError: Error, Codable, CaseIterable {
     /// Indicates, that the Internet connection has been lost.
     case lostConnection
@@ -17,10 +17,12 @@ public enum NetworkError: Error, Codable, CaseIterable {
     /// Indicates, that the client needs to authenticate to gain network access.
     case authenticationError
     
-    /// Indicates, that the request to connect and log on to an FTP server could not be completed because the supplied user name is incorrect.
+    /// Indicates, that the request to connect and log on to an FTP server could not be completed
+    /// because the supplied user name is incorrect.
     case userNameError
     
-    /// Indicates, that the request to connect and log on to an FTP server could not be completed because the supplied password is incorrect.
+    /// Indicates, that the request to connect and log on to an FTP server could not be completed
+    /// because the supplied password is incorrect.
     case passwordError
 
     /// Indicates, that the request to connect to and log on to an FTP server failed.
