@@ -1,7 +1,7 @@
 import Foundation
 
 /// Contains network errors that may occur, while the application is running.
-public enum NetworkError: Error, Codable, CaseIterable {
+public enum NetworkError: Error, CaseIterable {
     /// Indicates that the Internet connection has been lost.
     case lostConnection
     
