@@ -23,4 +23,8 @@ final class NetworkErrorTests: XCTestCase {
         // Then
         XCTAssertEqual(possibleNetworkErrors, expectedNetworkErrors)
     }
+    
+    func testNetworkErrorsConformToError() {
+       XCTAssertNotNil(NetworkError.self as Error.Type)
+    }
 }
