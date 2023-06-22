@@ -3,16 +3,24 @@ import XCTest
 
 final class NetworkErrorTests: XCTestCase {
     func testAllNetworkErrorsExistInAPI() {
-        XCTAssertTrue(NetworkError.allCases.contains(.badRequest))
-        XCTAssertTrue(NetworkError.allCases.contains(.loginTimeOut))
-        XCTAssertTrue(NetworkError.allCases.contains(.decodingError))
-        XCTAssertTrue(NetworkError.allCases.contains(.invalidURL))
-        XCTAssertTrue(NetworkError.allCases.contains(.loginError))
-        XCTAssertTrue(NetworkError.allCases.contains(.lostConnection))
-        XCTAssertTrue(NetworkError.allCases.contains(.passwordError))
-        XCTAssertTrue(NetworkError.allCases.contains(.requestTimeOut))
-        XCTAssertTrue(NetworkError.allCases.contains(.serverUnavailable))
-        XCTAssertTrue(NetworkError.allCases.contains(.unknownError))
-        XCTAssertTrue(NetworkError.allCases.contains(.decodingError))
+        // Given
+        let possibleNetworkErrors = Set(NetworkError.allCases)
+
+        // When
+        let expectedNetworkErrors = Set([
+            NetworkError.lostConnection,
+            NetworkError.serverUnavailable,
+            NetworkError.badRequest,
+            NetworkError.passwordError,
+            NetworkError.loginError,
+            NetworkError.requestTimeOut,
+            NetworkError.sessionExpired,
+            NetworkError.invalidURL,
+            NetworkError.missingData,
+            NetworkError.unknownError,
+        ])
+
+        // Then
+        XCTAssertEqual(possibleNetworkErrors, expectedNetworkErrors)
     }
 }
