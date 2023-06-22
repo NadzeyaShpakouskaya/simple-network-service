@@ -2,10 +2,6 @@ import Foundation
 
 /// Encapsulates an HTTP request with the necessary components.
 public struct HTTPRequest {
-    public typealias HTTPHeaderKey = String
-    public typealias HTTPHeaderValue = String
-    public typealias HTTPHeaders = [HTTPHeaderKey: HTTPHeaderValue]
-
     /// Creates a request with the provided parameters.
     ///
     /// - Parameters:
