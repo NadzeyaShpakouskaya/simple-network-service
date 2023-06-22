@@ -1,16 +1,16 @@
 import NetworkService
 import XCTest
 
-final class RequestTests: XCTestCase {
-    func testRequestsPropertiesContainValuesPassedToInit() {
+final class HTTPRequestTests: XCTestCase {
+    func testHTTPRequestsPropertiesContainValuesPassedToInit() {
         // Given
         let url = URL(string: "https://www.example.com")!
         let httpMethod = HTTPMethod.get
-        let httpHeaders: Request.HTTPHeaders = ["a": "b"]
+        let httpHeaders: HTTPRequest.HTTPHeaders = ["a": "b"]
         let body = ""
 
         // When
-        let requestWithBody = Request(
+        let requestWithBody = HTTPRequest(
             URI: url,
             requestMethod: httpMethod,
             headers: httpHeaders,
@@ -28,10 +28,10 @@ final class RequestTests: XCTestCase {
         // Given
         let url = URL(string: "https://www.example.com")!
         let httpMethod = HTTPMethod.get
-        let httpHeaders: Request.HTTPHeaders = ["a": "b"]
+        let httpHeaders: HTTPRequest.HTTPHeaders = ["a": "b"]
 
         // When
-        let requestWithoutBody = Request(
+        let requestWithoutBody = HTTPRequest(
             URI: url,
             requestMethod: httpMethod,
             headers: httpHeaders

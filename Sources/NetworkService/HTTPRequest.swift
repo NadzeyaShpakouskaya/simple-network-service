@@ -1,7 +1,7 @@
 import Foundation
 
 /// Encapsulates an HTTP request with the necessary components.
-public struct Request {
+public struct HTTPRequest {
     public typealias HTTPHeaderKey = String
     public typealias HTTPHeaderValue = String
     public typealias HTTPHeaders = [HTTPHeaderKey: HTTPHeaderValue]
@@ -13,10 +13,11 @@ public struct Request {
     ///    - requestMethod: The HTTP request method.
     ///    - headers: HTTP header fields for the request.
     ///    - body: The data sent as the message body of the request.
+    ///    By default the body is `nil`.
     public init(
         URI: URL,
         requestMethod: HTTPMethod,
-        headers: Request.HTTPHeaders,
+        headers: HTTPRequest.HTTPHeaders,
         body: String? = nil
     ) {
         self.URI = URI
