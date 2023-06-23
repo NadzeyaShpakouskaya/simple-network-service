@@ -21,7 +21,7 @@ extension NetworkError: LocalizedError {
         case .missingData:
             return "The server successfully processed the request, but there is no data for the request."
         case .unknownError:
-            return "Unknown error. Please try again"
+            return "Unknown error. Please try again."
         }
     }
 }
