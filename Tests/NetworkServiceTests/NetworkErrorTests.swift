@@ -7,7 +7,7 @@ final class NetworkErrorTests: XCTestCase {
         let possibleNetworkErrors = Set(NetworkError.allCases)
 
         // When
-        let expectedNetworkErrors = Set([
+        let expectedNetworkErrors: Set = [
             NetworkError.lostConnection,
             NetworkError.serverUnavailable,
             NetworkError.badRequest,
@@ -17,7 +17,7 @@ final class NetworkErrorTests: XCTestCase {
             NetworkError.invalidURL,
             NetworkError.missingData,
             NetworkError.unknownError,
-        ])
+        ]
 
         // Then
         XCTAssertEqual(possibleNetworkErrors, expectedNetworkErrors)
