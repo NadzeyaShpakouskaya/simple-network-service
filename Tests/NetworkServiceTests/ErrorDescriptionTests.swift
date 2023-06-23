@@ -3,7 +3,6 @@ import XCTest
 
 final class ErrorDescriptionTests: XCTestCase {
     func testErrorDescriptionExistsInAPI() {
-        
         XCTAssertEqual(NetworkError.lostConnection.localizedDescription, "lostConnection")
         XCTAssertEqual(NetworkError.serverUnavailable.localizedDescription, "serverUnavailable")
         XCTAssertEqual(NetworkError.badRequest.localizedDescription, "badRequest")
