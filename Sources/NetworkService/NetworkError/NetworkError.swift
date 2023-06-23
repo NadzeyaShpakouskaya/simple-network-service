@@ -21,6 +21,6 @@ public enum NetworkError: Error, CaseIterable {
     /// Indicates that the server stopped waiting for the request because the client took too long to produce a request.
     case requestTimeout
 
-    /// indicates that an unknown error has occurred.
+    /// Indicates that an unknown error has occurred.
     case unknownError
 }
