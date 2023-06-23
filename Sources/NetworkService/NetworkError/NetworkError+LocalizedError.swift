@@ -4,9 +4,9 @@ extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .badRequest:
-            return "The server cannot process the request because an error was found in the request."
+            return "The server cannot process the request due to an error in the request."
         case .authenticationError:
-            return "The request was not completed. The authentication is required for access."
+            return "The server cannot complete the request because it lacks valid authentication credentials for the requested resource."
         case .clientError:
             return "The server cannot process the request due to a client error."
         case .serverError:
