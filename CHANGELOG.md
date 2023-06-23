@@ -8,4 +8,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added 
 
-- Add `Enum contains network errors` - [#5](https://github.com/ios-course/simple-network-service/issues/5)
+- Add `NetworkError` enum - [#4](https://github.com/ios-course/simple-network-service/pull/4)
