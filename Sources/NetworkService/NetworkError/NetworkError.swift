@@ -12,12 +12,8 @@ public enum NetworkError: Error, CaseIterable {
     /// (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing).
     case badRequest
     
-    /// Indicates that the request to connect and log on to an FTP server could not be completed
-    /// because the supplied password is incorrect.
-    case passwordError
-    
-    /// Indicates that the request to connect to and log on to an FTP server failed.
-    case loginError
+    /// Indicates that an authentication error occurred, either due to a login failure or an incorrect password.
+    case authenticationError
     
     /// Indicates that the server stopped waiting for the request because the client took too long to produce a request.
     case requestTimeOut
