@@ -3,7 +3,7 @@ import XCTest
 
 final class NetworkErrorLocalizedErrorTests: XCTestCase {
     func testLocalizedDescriptionReturnsCorrespondingMessageForBadRequestError() {
-        let expectedLocalizedDescription = "The server cannot process the request because an error was found in the request. Please check the request and try again."
+        let expectedLocalizedDescription = "The server cannot process the request because an error was found in the request."
         let actualLocalizedDescription = NetworkError.badRequest.localizedDescription
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -27,13 +27,13 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
     }
     
     func testLocalizedDescriptionReturnsCorrespondingMessageForRequestTimeoutError() {
-        let expectedLocalizedDescription = "The server timed out waiting for the request. Please try again."
+        let expectedLocalizedDescription = "The server timed out waiting for the request."
         let actualLocalizedDescription = NetworkError.requestTimeout.localizedDescription
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
     
     func testLocalizedDescriptionReturnsCorrespondingMessageForUnknownError() {
-        let expectedLocalizedDescription = "Unknown error. Please try again."
+        let expectedLocalizedDescription = "Unknown error."
         let actualLocalizedDescription = NetworkError.unknownError.localizedDescription
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
