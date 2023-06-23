@@ -1,7 +1,7 @@
 import Foundation
 
 /// Contains network errors that may occur, while the application is running.
-public enum NetworkError: Error, CaseIterable {
+public enum NetworkError: Error {
     /// Indicates that the server cannot process the request due to a client error
     /// (e.g., malformed request syntax, size too large, invalid request message framing,
     /// or deceptive request routing).
