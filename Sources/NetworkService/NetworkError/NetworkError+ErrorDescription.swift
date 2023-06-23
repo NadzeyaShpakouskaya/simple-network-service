@@ -11,10 +11,8 @@ extension NetworkError: LocalizedError {
             return "serverUnavailable"
         case .badRequest:
             return "badRequest"
-        case .passwordError:
-            return "passwordError"
-        case .loginError:
-            return "loginError"
+        case .authenticationError:
+            return "authenticationError"
         case .requestTimeOut:
             return "requestTimeOut"
         case .sessionExpired:
