@@ -8,14 +8,11 @@ final class NetworkErrorTests: XCTestCase {
 
         // When
         let expectedNetworkErrors: Set = [
-            NetworkError.lostConnection,
-            NetworkError.serverUnavailable,
             NetworkError.badRequest,
             NetworkError.authenticationError,
-            NetworkError.requestTimeOut,
-            NetworkError.sessionExpired,
-            NetworkError.invalidURL,
-            NetworkError.missingData,
+            NetworkError.clientError,
+            NetworkError.serverError,
+            NetworkError.requestTimeout,
             NetworkError.unknownError,
         ]
 

@@ -2,31 +2,25 @@ import Foundation
 
 /// Contains network errors that may occur, while the application is running.
 public enum NetworkError: Error, CaseIterable {
-    /// Indicates that the Internet connection has been lost.
-    case lostConnection
-
-    /// Indicates that the server cannot handle the request (because it is overloaded or down for maintenance).
-    case serverUnavailable
-
     /// Indicates that the server cannot process the request due to a client error
-    /// (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing).
+    /// (e.g., malformed request syntax, size too large, invalid request message framing,
+    /// or deceptive request routing).
     case badRequest
 
-    /// Indicates that an authentication error occurred, either due to a login failure or an incorrect password.
+    /// Indicates that the client request has not been completed
+    /// because it lacks valid authentication credentials for the requested resource.
     case authenticationError
 
+    /// Indicates the server cannot or will not process the request
+    /// due to something that is perceived to be a client error.
+    case clientError
+
+    /// Indicates the server cannot or will not process the request due to server issue.
+    case serverError
+    
     /// Indicates that the server stopped waiting for the request because the client took too long to produce a request.
-    case requestTimeOut
+    case requestTimeout
 
-    /// Indicates that the client's session has expired and must log in again.
-    case sessionExpired
-
-    /// Indicates that the Uniform Resource Locator is invalid.
-    case invalidURL
-
-    /// Indicates that the response was successful, but no data comes back.
-    case missingData
-
-    /// Not specified error.
+    /// indicates that an unknown error has occurred.
     case unknownError
 }
