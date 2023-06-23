@@ -3,12 +3,11 @@ import Foundation
 extension NetworkError: LocalizedError {
     /// Provides a description of errors that may occur, while the application is running.
     public var errorDescription: String? {
-        
         switch self {
         case .lostConnection:
-            return "lostConnection"
+            return "Lost connection to the server. Please check your internet connection and try again."
         case .serverUnavailable:
-            return "serverUnavailable"
+            return "The server is currently unavailable. Please try again later."
         case .badRequest:
             return "badRequest"
         case .authenticationError:
@@ -22,7 +21,7 @@ extension NetworkError: LocalizedError {
         case .missingData:
             return "missingData"
         case .unknownError:
-            return "unknownError"
+            return "Unknown error."
         }
     }
 }
