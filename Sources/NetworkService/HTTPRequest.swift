@@ -13,12 +13,10 @@ public struct HTTPRequest {
     public init(
         URI: URL,
         requestMethod: HTTPMethod,
-        headers: HTTPRequest.HTTPHeaders,
         body: String? = nil
     ) {
         self.URI = URI
         self.requestMethod = requestMethod
-        self.headers = headers
         self.body = requestMethod != .get ? body : nil
     }
 
