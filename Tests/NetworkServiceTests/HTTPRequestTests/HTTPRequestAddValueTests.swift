@@ -45,6 +45,18 @@ final class HTTPRequestAddValueTests: XCTestCase {
         // Then
         XCTAssertEqual(request.allHTTPHeaders, [headerName: headerValue])
     }
+    
+    func testAddsNewHeaderValueWhenTheHeaderNameIsEmptyString() {
+        // Given
+        let headerName = ""
+        let headerValue = "A"
+
+        // When
+        request.addValue(headerValue, for: headerName)
+
+        // Then
+        XCTAssertEqual(request.allHTTPHeaders, [headerName: headerValue])
+    }
 
     func testAddsNewHeaderValueWhenAllHeadersContainSuchHeader() {
         // Given
@@ -61,7 +73,7 @@ final class HTTPRequestAddValueTests: XCTestCase {
         XCTAssertEqual(request.allHTTPHeaders, [headerName: expectedHeaderValue])
     }
 
-    func testAddsEmptyStringAndSpaceToExistingHeader() {
+    func testAddsEmptyStringAndSpaceToHeaderValue() {
         // Given
         let headerName = "A"
         let headerValueOne = " "
