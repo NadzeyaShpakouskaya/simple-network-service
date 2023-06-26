@@ -53,23 +53,24 @@ public struct HTTPRequest {
     ///   - headerName: The name of the header field. In keeping with the HTTP
     ///   RFC, HTTP header field names are case insensitive.
     public mutating func addValue(_ value: HTTPHeaderValue, for headerName: HTTPHeaderName) {
-        if let currentValue = headers[headerName] {
-            headers[headerName] = currentValue + ",\(value)"
+        let lowercasedName = headerName.lowercased()
+        if let currentValue = headers[lowercasedName] {
+            headers[lowercasedName] = currentValue + ",\(value)"
         } else {
-            headers[headerName] = value
+            headers[lowercasedName] = value
         }
     }
 
-    /// Sets a value for the header field. If the header already exists, the
-    /// existing value will be replaced.
+    /// Sets a value for the header field. If the header already exists, the existing
+    /// value will be replaced. If the set value is `nil`, the header is removed.
     ///
     /// - Parameters:
-    ///   - value: The new value for the header field. Any existing value for
-    ///   the field is replaced by the new value.
-    ///   - headerName: The name of the header field to set. In keeping with the
-    ///   HTTP RFC, HTTP header field names are case insensitive.
-    public mutating func setValue(_ value: HTTPHeaderValue, for headerName: HTTPHeaderName) {
-        headers[headerName] = value
+    ///   - value: The new value for the header field. Any existing value for the field
+    ///   is replaced by the new value.
+    ///   - headerName: The name of the header field to set. In keeping with the HTTP RFC,
+    ///   HTTP header field names are case insensitive.
+    public mutating func setValue(_ value: HTTPHeaderValue?, for headerName: HTTPHeaderName) {
+        headers[headerName.lowercased()] = value
     }
 
     // MARK: - Private interface
