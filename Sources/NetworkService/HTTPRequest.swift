@@ -5,7 +5,7 @@ public struct HTTPRequest {
     /// Creates a request with the provided parameters.
     ///
     /// - Parameters:
-    ///    - URI: The URL of the request.
+    ///    - URI: URL that identifies the location of a resource on a remote server.
     ///    - requestMethod: The HTTP request method.
     ///    - headers: HTTP header fields for the request.
     ///    - body: The data sent as the message body of the request.
@@ -20,7 +20,7 @@ public struct HTTPRequest {
         self.body = requestMethod != .get ? body : nil
     }
 
-    /// The URL of the request.
+    /// URL that identifies the location of a resource on a remote server.
     public let URI: URL
 
     /// The HTTP request method.
