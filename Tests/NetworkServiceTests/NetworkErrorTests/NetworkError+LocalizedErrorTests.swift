@@ -9,7 +9,10 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
     }
 
     func testLocalizedDescriptionReturnsCorrespondingMessageForAuthenticationError() {
-        let expectedLocalizedDescription = "The server cannot complete the request because it lacks valid authentication credentials for the requested resource."
+        let expectedLocalizedDescription = """
+            The server cannot complete the request.
+            It lacks valid authentication credentials for the requested resource.
+            """
         let actualLocalizedDescription = NetworkError.authenticationError.localizedDescription
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
