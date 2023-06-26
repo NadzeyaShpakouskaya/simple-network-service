@@ -39,6 +39,20 @@ final class HTTPRequestValueForHeaderNameTests: XCTestCase {
         XCTAssertEqual(expectedHeaderValueTwo, headerValueTwo)
     }
 
+    func testHeaderStaysNotModifiedAmongHeadersAfterAccessing() {
+        // Given
+        let headerName = "a"
+        let headerValue = "A"
+        request.setValue(headerValue, for: headerName)
+
+        // When
+        let firstAccessToHeaderValue = request.value(for: headerName)
+        let secondAccessToHeaderValue = request.value(for: headerName)
+
+        // Then
+        XCTAssertEqual(firstAccessToHeaderValue, secondAccessToHeaderValue)
+    }
+
     // MARK: - Private interface
 
     private var request: HTTPRequest!
