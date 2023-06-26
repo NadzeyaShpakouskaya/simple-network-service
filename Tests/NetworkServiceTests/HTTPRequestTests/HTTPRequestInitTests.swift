@@ -2,7 +2,7 @@ import NetworkService
 import XCTest
 
 final class HTTPRequestInitTests: XCTestCase {
-    func testCreateNewInstanceWithExpectedPropertyValues() {
+    func testCreatesNewInstanceWithExpectedPropertyValues() {
         // Given
         let url = URL(string: "https://www.example.com")!
         let httpMethod = HTTPMethod.post
