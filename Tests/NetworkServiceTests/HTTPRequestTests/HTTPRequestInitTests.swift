@@ -4,7 +4,6 @@ import XCTest
 final class HTTPRequestInitTests: XCTestCase {
     func testCreatesNewInstanceWithExpectedPropertyValues() {
         // Given
-        let url = URL(string: "https://www.example.com")!
         let httpMethod = HTTPMethod.post
         let body = ""
 
@@ -33,18 +32,20 @@ final class HTTPRequestInitTests: XCTestCase {
 
     func testNewInstanceHasNilBodyIfHTTPMethodIsGetAndBodyIsPassed() {
         // Given
-        let url = URL(string: "https://www.example.com")!
-        let httpMethod = HTTPMethod.get
         let body = ""
 
         // When
         let requestWithBody = HTTPRequest(
             URI: url,
-            requestMethod: httpMethod,
+            requestMethod: .get,
             body: body
         )
 
         // Then
         XCTAssertNil(requestWithBody.body)
     }
+
+    // MARK: - Private interface
+
+    private let url = URL(string: "https://www.example.com")!
 }
