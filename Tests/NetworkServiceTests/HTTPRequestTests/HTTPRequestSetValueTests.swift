@@ -19,7 +19,7 @@ final class HTTPRequestSetValueTests: XCTestCase {
         request.setValue(headerValue, for: headerName)
 
         // Then
-        XCTAssertEqual(request.allHTTPHeaders, [headerName: headerValue])
+        XCTAssertEqual(request.value(for: headerName), headerValue)
     }
 
     func testCreatesNewHeaderWhenTheHeaderValueIsEmptyString() {
@@ -31,7 +31,7 @@ final class HTTPRequestSetValueTests: XCTestCase {
         request.setValue(headerValue, for: headerName)
 
         // Then
-        XCTAssertEqual(request.allHTTPHeaders, [headerName: headerValue])
+        XCTAssertEqual(request.value(for: headerName), headerValue)
     }
 
     func testCreatesNewHeaderWhenTheHeaderValueIsSpace() {
@@ -43,7 +43,7 @@ final class HTTPRequestSetValueTests: XCTestCase {
         request.setValue(headerValue, for: headerName)
 
         // Then
-        XCTAssertEqual(request.allHTTPHeaders, [headerName: headerValue])
+        XCTAssertEqual(request.value(for: headerName), headerValue)
     }
 
     func testOverridesThePreviousHeaderValue() {
@@ -57,7 +57,7 @@ final class HTTPRequestSetValueTests: XCTestCase {
         request.setValue(overridingHeaderValue, for: headerName)
 
         // Then
-        XCTAssertEqual(request.allHTTPHeaders, [headerName: overridingHeaderValue])
+        XCTAssertEqual(request.value(for: headerName), overridingHeaderValue)
     }
 
     func testDeletesHeaderIfTheSetHeaderValueIsNil() {
