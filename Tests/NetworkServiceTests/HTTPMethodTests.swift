@@ -6,9 +6,9 @@ final class HTTPMethodTests: XCTestCase {
         // Given
         let currentHTTPMethods = Set(HTTPMethod.allCases)
         let expectedHTTPMethods: Set<HTTPMethod> = [
-            HTTPMethod.get,
-            HTTPMethod.post,
-            HTTPMethod.put,
+            .get,
+            .post,
+            .put,
         ]
 
         // When // Then
