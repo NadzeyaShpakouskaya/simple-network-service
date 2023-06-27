@@ -6,7 +6,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         // Given
         let expectedLocalizedDescription = "The server cannot process the request due to an error in the request."
         let actualLocalizedDescription = NetworkError.badRequest.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -14,11 +14,11 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
     func testLocalizedDescriptionReturnsCorrespondingMessageForAuthenticationError() {
         // Given
         let expectedLocalizedDescription = """
-            The server cannot complete the request.
-            It lacks valid authentication credentials for the requested resource.
-            """
+        The server cannot complete the request.
+        It lacks valid authentication credentials for the requested resource.
+        """
         let actualLocalizedDescription = NetworkError.authenticationError.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -27,7 +27,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         // Given
         let expectedLocalizedDescription = "The server cannot process the request due to a client error."
         let actualLocalizedDescription = NetworkError.clientError.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -36,7 +36,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         // Given
         let expectedLocalizedDescription = "The server cannot process the request due to a issue with the server."
         let actualLocalizedDescription = NetworkError.serverError.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -45,7 +45,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         // Given
         let expectedLocalizedDescription = "The server timed out waiting for the request."
         let actualLocalizedDescription = NetworkError.requestTimeout.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }
@@ -54,7 +54,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         // Given
         let expectedLocalizedDescription = "Unknown error."
         let actualLocalizedDescription = NetworkError.unknownError.localizedDescription
-        
+
         // When // Then
         XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
     }

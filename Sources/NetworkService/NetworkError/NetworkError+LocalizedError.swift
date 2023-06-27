@@ -7,9 +7,9 @@ extension NetworkError: LocalizedError {
             return "The server cannot process the request due to an error in the request."
         case .authenticationError:
             return """
-                The server cannot complete the request.
-                It lacks valid authentication credentials for the requested resource.
-                """
+            The server cannot complete the request.
+            It lacks valid authentication credentials for the requested resource.
+            """
         case .clientError:
             return "The server cannot process the request due to a client error."
         case .serverError:
