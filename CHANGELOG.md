@@ -8,4 +8,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added 
 
-- Add `HTTPMethod` enum and `HTTPRequest` type - [#2](https://github.com/ios-course/simple-network-service/pull/2)
+- Add `HTTPMethod` enum and `HTTPHeaders` type alias - [#2](https://github.com/ios-course/simple-network-service/pull/2)
