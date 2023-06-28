@@ -16,8 +16,8 @@ extension NetworkError: LocalizedError {
             return "The server cannot process the request due to a client error."
         case .serverError:
             return "The server cannot process the request due to a issue with the server."
-        case .requestTimeout:
-            return "The server timed out waiting for the request."
+        case .resourceTimeout:
+            return "The client timed out waiting for the resource."
         case .unknownError:
             return "Unknown error."
         }

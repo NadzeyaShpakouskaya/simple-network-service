@@ -12,7 +12,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         """
         let clientErrorDescription = "The server cannot process the request due to a client error."
         let serverErrorDescription = "The server cannot process the request due to a issue with the server."
-        let requestTimeoutDescription = "The server timed out waiting for the request." // TODO: response?
+        let resourceTimeoutDescription = "The client timed out waiting for the resource."
         let unknownErrorDescription = "Unknown error."
 
         // When // Then
@@ -21,7 +21,7 @@ final class NetworkErrorLocalizedErrorTests: XCTestCase {
         XCTAssertEqual(NetworkError.authenticationError.localizedDescription, authenticationErrorDescription)
         XCTAssertEqual(NetworkError.clientError.localizedDescription, clientErrorDescription)
         XCTAssertEqual(NetworkError.serverError.localizedDescription, serverErrorDescription)
-        XCTAssertEqual(NetworkError.requestTimeout.localizedDescription, requestTimeoutDescription)
+        XCTAssertEqual(NetworkError.resourceTimeout.localizedDescription, resourceTimeoutDescription)
         XCTAssertEqual(NetworkError.unknownError.localizedDescription, unknownErrorDescription)
     }
 }

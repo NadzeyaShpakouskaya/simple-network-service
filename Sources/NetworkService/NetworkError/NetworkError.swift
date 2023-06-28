@@ -21,8 +21,8 @@ public enum NetworkError: Error, CaseIterable {
     /// Indicates the server cannot or will not process the request due to server issue.
     case serverError
 
-    /// Indicates that the server stopped waiting for the request because the client took too long to produce a request.
-    case requestTimeout
+    /// Indicates that the client stopped waiting for the resource and the resource was not transferred entirely.
+    case resourceTimeout
 
     /// Indicates that an unknown error has occurred.
     case unknownError

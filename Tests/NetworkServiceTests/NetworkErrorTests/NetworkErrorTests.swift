@@ -13,7 +13,7 @@ final class NetworkErrorTests: XCTestCase {
             .authenticationError,
             .clientError,
             .serverError,
-            .requestTimeout,
+            .resourceTimeout,
             .unknownError,
         ]
 
