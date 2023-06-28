@@ -7,6 +7,9 @@ public enum NetworkError: Error, CaseIterable {
     /// or deceptive request routing).
     case badRequest
 
+    /// Indicates that the response from the serveris invalid or the client couldn't parse it.
+    case badResponse
+
     /// Indicates that the client request has not been completed
     /// because it lacks valid authentication credentials for the requested resource.
     case authenticationError
