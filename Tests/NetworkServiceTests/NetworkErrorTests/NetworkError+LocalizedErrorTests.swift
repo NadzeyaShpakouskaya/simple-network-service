@@ -2,60 +2,26 @@ import NetworkService
 import XCTest
 
 final class NetworkErrorLocalizedErrorTests: XCTestCase {
-    func testLocalizedDescriptionReturnsCorrespondingMessageForBadRequestError() {
+    func testLocalizedDescriptionReturnExpectedString() {
         // Given
-        let expectedLocalizedDescription = "The server cannot process the request due to an error in the request."
-        let actualLocalizedDescription = NetworkError.badRequest.localizedDescription
-
-        // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
-    }
-
-    func testLocalizedDescriptionReturnsCorrespondingMessageForAuthenticationError() {
-        // Given
-        let expectedLocalizedDescription = """
+        let badRequestDescription = "The server cannot process the request due to an error in the request."
+        let badResponseDescription = "The response is invalid or couldn't be parsed."
+        let authenticationErrorDescription = """
         The server cannot complete the request.
         It lacks valid authentication credentials for the requested resource.
         """
-        let actualLocalizedDescription = NetworkError.authenticationError.localizedDescription
+        let clientErrorDescription = "The server cannot process the request due to a client error."
+        let serverErrorDescription = "The server cannot process the request due to a issue with the server."
+        let resourceTimeoutDescription = "The client timed out waiting for the resource."
+        let unknownErrorDescription = "Unknown error."
 
         // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
-    }
-
-    func testLocalizedDescriptionReturnsCorrespondingMessageForClientError() {
-        // Given
-        let expectedLocalizedDescription = "The server cannot process the request due to a client error."
-        let actualLocalizedDescription = NetworkError.clientError.localizedDescription
-
-        // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
-    }
-
-    func testLocalizedDescriptionReturnsCorrespondingMessageForServerError() {
-        // Given
-        let expectedLocalizedDescription = "The server cannot process the request due to a issue with the server."
-        let actualLocalizedDescription = NetworkError.serverError.localizedDescription
-
-        // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
-    }
-
-    func testLocalizedDescriptionReturnsCorrespondingMessageForRequestTimeoutError() {
-        // Given
-        let expectedLocalizedDescription = "The server timed out waiting for the request."
-        let actualLocalizedDescription = NetworkError.requestTimeout.localizedDescription
-
-        // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
-    }
-
-    func testLocalizedDescriptionReturnsCorrespondingMessageForUnknownError() {
-        // Given
-        let expectedLocalizedDescription = "Unknown error."
-        let actualLocalizedDescription = NetworkError.unknownError.localizedDescription
-
-        // When // Then
-        XCTAssertEqual(expectedLocalizedDescription, actualLocalizedDescription)
+        XCTAssertEqual(NetworkError.badRequest.localizedDescription, badRequestDescription)
+        XCTAssertEqual(NetworkError.badResponse.localizedDescription, badResponseDescription)
+        XCTAssertEqual(NetworkError.authenticationError.localizedDescription, authenticationErrorDescription)
+        XCTAssertEqual(NetworkError.clientError.localizedDescription, clientErrorDescription)
+        XCTAssertEqual(NetworkError.serverError.localizedDescription, serverErrorDescription)
+        XCTAssertEqual(NetworkError.resourceTimeout.localizedDescription, resourceTimeoutDescription)
+        XCTAssertEqual(NetworkError.unknownError.localizedDescription, unknownErrorDescription)
     }
 }

@@ -4,23 +4,24 @@ import XCTest
 final class NetworkErrorTests: XCTestCase {
     func testAllNetworkErrorsExistInAPI() {
         // Given
-        let possibleNetworkErrors = Set(NetworkError.allCases)
+        let setOfNetworkErrors = Set(NetworkError.allCases)
 
         // When
-        let expectedNetworkErrors: Set = [
-            NetworkError.badRequest,
-            NetworkError.authenticationError,
-            NetworkError.clientError,
-            NetworkError.serverError,
-            NetworkError.requestTimeout,
-            NetworkError.unknownError,
+        let expectedNetworkErrors: Set<NetworkError> = [
+            .badRequest,
+            .badResponse,
+            .authenticationError,
+            .clientError,
+            .serverError,
+            .resourceTimeout,
+            .unknownError,
         ]
 
         // Then
-        XCTAssertEqual(possibleNetworkErrors, expectedNetworkErrors)
+        XCTAssertEqual(setOfNetworkErrors, expectedNetworkErrors)
     }
 
-    func testNetworkErrorsConformToError() {
+    func testNetworkErrorConformsToErrorProtocol() {
         XCTAssertNotNil(NetworkError.self as Error.Type)
     }
 }
