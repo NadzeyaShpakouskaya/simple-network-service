@@ -14,7 +14,7 @@ public protocol HTTPAPIEndpoint {
 
     /// The relative path for the specific API endpoint, which will be appended to the baseURL to form the complete URL for the request.
     var path: String { get }
-    
+
     /// A type of the request depending on availability and type of additional parameters.
     var task: HTTPTask { get }
 
