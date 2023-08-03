@@ -10,7 +10,7 @@ final class HTTPTaskTests: XCTestCase {
 
     func testCreatesHTTPTaskWithEmptyURLParameters() {
         // Given
-        let emptyUrlParameters = HTTPTask.URLParameters()
+        let emptyUrlParameters = URLParameters()
 
         // When
         let task = HTTPTask.requestWithURLParameters(urlParameters: emptyUrlParameters)
@@ -21,7 +21,7 @@ final class HTTPTaskTests: XCTestCase {
 
     func testCreatesHTTPTaskWithNilAsURLParameters() {
         // Given
-        let nilUrlParameters: HTTPTask.URLParameters? = nil
+        let nilUrlParameters: URLParameters? = nil
 
         // When
         let task = HTTPTask.requestWithURLParameters(urlParameters: nilUrlParameters)
@@ -79,7 +79,7 @@ final class HTTPTaskTests: XCTestCase {
 
     func testCreatesHTTPTaskWithEmptyBodyParameters() {
         // Given
-        let emptyBodyParameters = HTTPTask.BodyParameters()
+        let emptyBodyParameters = BodyParameters()
 
         // When
         let task = HTTPTask.requestWithBodyParameters(bodyParameters: emptyBodyParameters)
@@ -90,7 +90,7 @@ final class HTTPTaskTests: XCTestCase {
 
     func testCreatesHTTPTaskWithNilAsBodyParameters() {
         // Given
-        let nilBodyParameters: HTTPTask.BodyParameters? = nil
+        let nilBodyParameters: BodyParameters? = nil
 
         // When
         let task = HTTPTask.requestWithBodyParameters(bodyParameters: nilBodyParameters)
