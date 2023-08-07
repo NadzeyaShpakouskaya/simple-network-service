@@ -1,4 +1,4 @@
-/// A type of the request depending on availability and type of additional parameters.
+/// Represents different tasks that can be performed in an HTTP request.
 public enum HTTPTask {
     /// The НТТР request without any parameters.
     case request
