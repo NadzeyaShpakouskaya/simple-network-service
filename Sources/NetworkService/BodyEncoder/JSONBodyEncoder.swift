@@ -30,8 +30,3 @@ public struct JSONBodyEncoder: BodyEncoder {
 
 /// The set of key-value pairs those make up the body of the HTTP request.
 public typealias BodyParameters = [String: Any]
-
-public enum InternalError: Error {
-    case serializationFailure
-    case invaldJSONObject
-}
