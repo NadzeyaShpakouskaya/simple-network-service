@@ -3,10 +3,9 @@ public enum HTTPTask {
     /// The НТТР request without any parameters.
     case request
 
-    /// The НТТР request that specify the parameters of the data that is
-    /// being queried from a server.
+    /// The НТТР request with the provided URL parameters to be included in the request.
     case requestWithURLParameters(urlParameters: URLParameters?)
 
-    /// The НТТР request that has a body.
+    /// The НТТР request that sends provided parameters as a request body.
     case requestWithBodyParameters(bodyParameters: BodyParameters?)
 }

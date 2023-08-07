@@ -1,6 +1,6 @@
 import Foundation
 
-/// Describes an API endpoint that supports communication by HTTP protocol.
+/// Describes the basic structure of an HTTP API endpoint that supports communication by HTTP protocol.
 public protocol HTTPAPIEndpoint {
     /// The environment that defines endpoint's server location.
     associatedtype Environment
@@ -15,12 +15,12 @@ public protocol HTTPAPIEndpoint {
     /// The relative path for the specific API endpoint, which will be appended to the baseURL to form the complete URL for the request.
     var path: String { get }
 
-    /// A type of the request depending on availability and type of additional parameters.
+    /// Represent tasks which can be performed in an HTTP request.
     var task: HTTPTask { get }
 
     /// The method to use in the HTTP request.
     var method: HTTPMethod { get }
 
-    /// HTTP header fields for a request.
+    /// HTTP header fields for the HTTP request.
     var headers: HTTPHeaders { get }
 }

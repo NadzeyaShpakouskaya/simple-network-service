@@ -1,3 +1,2 @@
-/// The set of key-value pairs those make up query string of the URL that specify
-/// the parameters of the data that is being queried from a server.
+/// The set of key-value pairs of URL parameters to be included in the request's URL.
 public typealias URLParameters = [String: String]
