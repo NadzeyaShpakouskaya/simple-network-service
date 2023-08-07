@@ -15,13 +15,13 @@ public struct JSONBodyEncoder: BodyEncoder {
     public static func encode(_ parameters: BodyParameters?, into request: inout URLRequest) throws {
         guard let parameters = parameters else { return }
         
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters),
-              JSONSerialization.isValidJSONObject(jsonData) else {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
             throw InternalError.serializationFailure
         }
         
-        guard JSONSerialization.isValidJSONObject(jsonData) else {
-            throw InternalError.invaldJSONObject
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData),
+                JSONSerialization.isValidJSONObject(jsonObject) else {
+            throw InternalError.invalidJSONObject
         }
         
         request.httpBody = jsonData
