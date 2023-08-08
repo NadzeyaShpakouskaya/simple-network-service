@@ -1,7 +1,6 @@
 import Foundation
 
 /// Encodes data into an `URLRequest`'s HTTP body.
-
 public struct JSONBodyEncoder: BodyEncoder {
     /**
      Encodes `BodyParameters` as the message body into the provided `URLRequest`.
@@ -10,7 +9,7 @@ public struct JSONBodyEncoder: BodyEncoder {
      - parameters: An optional `BodyParameters` object containing the data to be encoded.
      - request: An `inout` `URLRequest` object to which the encoded body will be assigned.
      
-     - Throws: An error of type `NetworkError.badRequest` if the encoding process fails due to an invalid JSON object.
+     - Throws: An error of type `InternalError` if the encoding process fails.
      */
     public static func encode(_ parameters: BodyParameters?, into request: inout URLRequest) throws {
         guard let parameters = parameters else { return }
