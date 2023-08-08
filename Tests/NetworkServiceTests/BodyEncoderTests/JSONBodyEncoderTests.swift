@@ -2,19 +2,18 @@ import NetworkService
 import XCTest
 
 final class JSONBodyEncoderTests: XCTestCase {
+    let testURL = Bundle.main.bundleURL
     var request: URLRequest!
     
-    override func setUpWithError() throws {
-        guard let testURL = URL(string: "https://www.google.com/") else { throw TestError.invalidURL }
+    override func setUp() {
+        super.setUp()
         request = URLRequest(url: testURL)
-        request.httpMethod = "POST"
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() {
+        super.tearDown()
         request = nil
     }
-    
-    
     
     func testEncodeExistsInAPI() throws {
         XCTAssertNoThrow(try JSONBodyEncoder.encode(nil, into: &request))
@@ -22,7 +21,7 @@ final class JSONBodyEncoderTests: XCTestCase {
     
     func testEncodeAddedExpectedBodyParameters() throws {
         let addingParameters = ["test": "param"]
-        let expectedData = try JSONSerialization.data(withJSONObject: addingParameters)
+        let expectedData = try JSONEncoder().encode(addingParameters)
 
         try JSONBodyEncoder.encode(addingParameters, into: &request)
         
@@ -30,8 +29,9 @@ final class JSONBodyEncoderTests: XCTestCase {
         XCTAssertEqual(expectedData, existingBody)
     }
     
+    func testRequestBodyIsNilWhenEncodesMethodCalledWithNilAsBodyParameters() throws {
+        try JSONBodyEncoder.encode(nil, into: &request)
+        XCTAssertNil(request.httpBody)
+    }
 }
 
-enum TestError: Error {
-    case invalidURL
-}
