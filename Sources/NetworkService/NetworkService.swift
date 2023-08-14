@@ -1,22 +1,32 @@
 import Foundation
-/// ToDo Doc comments
-final public class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
-    public var defaultTimeoutIntervalInSeconds: TimeInterval = 10.0
 
+/// A concrete implementation of the `NetworkRouter` protocol using the specified `HTTPAPIEndpoint` type for endpoints.
+public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
+    /// The default timeout interval (in seconds) for network requests.
+    public var defaultTimeoutIntervalInSeconds: TimeInterval = 10.0
+    
+    /// Sends a request to the specified server endpoint.
+    /// - Parameter route: The endpoint to which the request is to be sent.
+    /// - Returns: A `Result` object containing either the received data or an error in case of failure.
     public func request(_ route: Endpoint) async -> Result<Data, Error> {
         return await send(request(from: route))
     }
-
+    
     // MARK: - Private interface
+    
+    /// The current URLSessionTask for the network request.
     private var task: URLSessionTask?
-
+    
+    /// Creates a URLRequest from the specified endpoint.
+    /// - Parameter route: The endpoint for which the URLRequest is to be created.
+    /// - Returns: A URLRequest object representing the request to the endpoint.
     private func request(from route: Endpoint) -> URLRequest {
         var request = URLRequest(
             url: route.baseURL.appendingPathComponent(route.path),
             cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
             timeoutInterval: defaultTimeoutIntervalInSeconds
         )
-
+        
         switch route.task {
         case .request:
             break
@@ -25,15 +35,18 @@ final public class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
         case .requestWithBodyParameters(let bodyParameters):
             JSONBodyEncoder.encode(bodyParameters, into: &request)
         }
-
+        
         request.httpMethod = route.method.rawValue
         route.headers.forEach {
             request.setValue($0.value, forHTTPHeaderField: $0.key)
         }
-
+        
         return request
     }
-
+    
+    /// Sends the specified URLRequest and handles the response.
+    /// - Parameter request: The URLRequest to be sent.
+    /// - Returns: A `Result` object containing either the received data or an error in case of failure.
     private func send(_ request: URLRequest) async -> Result<Data, Error> {
         do {
             let (rawData, response) = try await URLSession.shared.data(for: request)
@@ -47,12 +60,15 @@ final public class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
             return .failure(error)
         }
     }
-
+    
+    /// Handles the received URLResponse and determines the result of the network request.
+    /// - Parameter response: The URLResponse received from the server.
+    /// - Returns: A `Result` object containing either success or an error based on the response status code.
     private func handle(_ response: URLResponse) -> Result<Void, Error> {
         guard let httpResponse = response as? HTTPURLResponse else {
             return .failure(NetworkError.badResponse)
         }
-
+        
         switch httpResponse.statusCode {
         case 200...299:
             return .success(())
