@@ -18,11 +18,6 @@ public struct JSONBodyEncoder: BodyEncoder {
             throw InternalError.serializationFailure
         }
         
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData),
-                JSONSerialization.isValidJSONObject(jsonObject) else {
-            throw InternalError.invalidJSONObject
-        }
-        
         request.httpBody = jsonData
     }
 }
