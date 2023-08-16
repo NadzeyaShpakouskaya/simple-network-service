@@ -1,12 +1,13 @@
 import Foundation
 
-/// A concrete implementation of the `NetworkRouter` protocol using the specified `HTTPAPIEndpoint` type for endpoints.
+/// Handles sending requests and receiving responses.
 public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
     /// The default timeout interval (in seconds) for network requests.
     public var defaultTimeoutIntervalInSeconds: TimeInterval = 10.0
     
-    /// Sends a request to the specified server endpoint.
-    /// - Parameter route: The endpoint to which the request is to be sent.
+    /// Sends a network request to the specified server endpoint.
+    ///
+    /// - Parameter route: The endpoint representing the target server location and details of the request.
     /// - Returns: A `Result` object containing either the received data or an error in case of failure.
     public func request(_ route: Endpoint) async -> Result<Data, Error> {
         return await send(request(from: route))
@@ -33,7 +34,11 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
         case .requestWithURLParameters(let urlParameters):
             URLParametersEncoder.encode(urlParameters, into: &request)
         case .requestWithBodyParameters(let bodyParameters):
-            JSONBodyEncoder.encode(bodyParameters, into: &request)
+            do {
+                try JSONBodyEncoder.encode(bodyParameters, into: &request)}
+            catch {
+                print("Error encoding JSON body: \(error)")
+            }
         }
         
         request.httpMethod = route.method.rawValue
