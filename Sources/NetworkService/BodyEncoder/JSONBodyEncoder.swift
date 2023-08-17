@@ -1,9 +1,9 @@
 import Foundation
 
-/// Encodes data into an `URLRequest`'s HTTP body.
+/// Encodes data into a request's HTTP body.
 public struct JSONBodyEncoder: BodyEncoder {
     /**
-     Encodes `BodyParameters` as the message body into the provided `URLRequest`.
+     Encodes provided data as the message body in JSON format into the provided request.
 
      - Parameters:
         - parameters: An optional set of parameters that contains the data to encode.
