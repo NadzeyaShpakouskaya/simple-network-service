@@ -3,13 +3,16 @@ import XCTest
 
 final class NetworkServiceInternalErrorTests: XCTestCase {
     func testAllNetworkServiceInternalErrorsExistInAPI() {
-        let setOfNetworkErrors = Set(NetworkServiceInternalError.allCases)
+        // Given
+        let setOfErrors = Set(NetworkServiceInternalError.allCases)
 
-        let expectedNetworkErrors: Set<NetworkServiceInternalError> = [
+        // When
+        let expectedErrors: Set<NetworkServiceInternalError> = [
             .serializationFailure
         ]
 
-        XCTAssertEqual(setOfNetworkErrors, expectedNetworkErrors)
+        // Then
+        XCTAssertEqual(setOfErrors, expectedErrors)
     }
 
     func testNetworkServiceInternalErrorConformsToErrorProtocol() {
