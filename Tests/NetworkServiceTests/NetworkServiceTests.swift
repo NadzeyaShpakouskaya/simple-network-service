@@ -11,98 +11,104 @@ final class NetworkServiceTests: XCTestCase {
         var headers: HTTPHeaders = [:]
     }
     
-    // MARK: - Tests
     var networkService: NetworkService<MockEndpoint>!
-        
-        override func setUpWithError() throws {
-            networkService = NetworkService()
-            URLProtocol.registerClass(MockURLProtocol.self)
-        }
-
-        override func tearDownWithError() throws {
-            URLProtocol.unregisterClass(MockURLProtocol.self)
-            networkService = nil
-        }
-        
-        func testSuccessfulRequest() async throws {
-            // Given
-            let expectedData = "Mocked Response Data".data(using: .utf8)!
-            MockURLProtocol.requestHandler = { request in
-                let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-                return (response, expectedData)
-            }
-            
-            let endpoint = MockEndpoint()
-            
-            // When
-            let result = await networkService.request(endpoint)
-            
-            // Then
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, expectedData)
-            case .failure(let error):
-                XCTFail("Expected success, but got failure: \(error)")
-            }
-        }
-        
-        func testBadRequest() async throws {
-            // Given
-            MockURLProtocol.requestHandler = { request in
-                let response = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)!
-                return (response, Data())
-            }
-            
-            let endpoint = MockEndpoint()
-            
-            // When
-            let result = await networkService.request(endpoint)
-            
-            // Then
-            switch result {
-            case .success:
-                XCTFail("Expected failure, but got success")
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .badRequest)
-            }
-        }
-
-    }
-
-
-// MARK: - MockURLProtocol
-
-class MockURLProtocol: URLProtocol {
     
-    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
-    
-    override class func canInit(with request: URLRequest) -> Bool {
-        return true
+    override func setUpWithError() throws {
+        networkService = NetworkService()
+        URLProtocol.registerClass(MockURLProtocol.self)
     }
     
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        return request
+    override func tearDownWithError() throws {
+        URLProtocol.unregisterClass(MockURLProtocol.self)
+        networkService = nil
     }
     
-    override func startLoading() {
-        guard let handler = MockURLProtocol.requestHandler else {
-            fatalError("MockURLProtocol.requestHandler is not set.")
+    func testSuccessfulRequest() async throws {
+        // Given
+        let expectedData = "Mocked Response Data".data(using: .utf8)!
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, expectedData)
         }
         
-        do {
-            let (response, data) = try handler(request)
-            
-            if let data = data {
-                client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-                client?.urlProtocol(self, didLoad: data)
-            }
-            
-            client?.urlProtocolDidFinishLoading(self)
-        } catch {
-            client?.urlProtocol(self, didFailWithError: error)
+        let endpoint = MockEndpoint()
+        
+        // When
+        let result = await networkService.request(endpoint)
+        
+        // Then
+        switch result {
+        case .success(let data):
+            XCTAssertEqual(data, expectedData)
+        case .failure(let error):
+            XCTFail("Expected success, but got failure: \(error)")
         }
     }
     
-    override func stopLoading() {
+    func testBadRequest() async throws {
+        // Given
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)!
+            return (response, Data())
+        }
+        
+        let endpoint = MockEndpoint()
+        
+        // When
+        let result = await networkService.request(endpoint)
+        
+        // Then
+        switch result {
+        case .success:
+            XCTFail("Expected failure, but got success")
+        case .failure(let error):
+            XCTAssertEqual(error as? NetworkError, .badRequest)
+        }
+    }
+    
+    func testRequestWithURLParameters() async throws {
+        // Given
+        let expectedData = "Mocked Response Data with URL Parameters".data(using: .utf8)!
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, expectedData)
+        }
+        
+        var endpoint = MockEndpoint()
+        endpoint.task = .requestWithURLParameters(urlParameters: ["key": "value"])
+        
+        // When
+        let result = await networkService.request(endpoint)
+        
+        // Then
+        switch result {
+        case .success(let data):
+            XCTAssertEqual(data, expectedData)
+        case .failure(let error):
+            XCTFail("Expected success, but got failure: \(error)")
+        }
+    }
+    
+    func testRequestWithBodyParameters() async throws {
+        // Given
+        let expectedData = "Mocked Response Data with Body Parameters".data(using: .utf8)!
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, expectedData)
+        }
+        
+        var endpoint = MockEndpoint()
+        endpoint.task = .requestWithBodyParameters(bodyParameters: ["key": "value"])
+        
+        // When
+        let result = await networkService.request(endpoint)
+        
+        // Then
+        switch result {
+        case .success(let data):
+            XCTAssertEqual(data, expectedData)
+        case .failure(let error):
+            XCTFail("Expected success, but got failure: \(error)")
+        }
     }
 }
