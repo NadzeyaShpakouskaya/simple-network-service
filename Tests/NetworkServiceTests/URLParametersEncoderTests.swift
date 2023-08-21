@@ -16,92 +16,52 @@ final class URLParametersEncoderTests: XCTestCase {
     }
 
     func testQueryItemsPropertyOfRequestIsNilWhenNilIsPassedAsParameters() throws {
-        // Given // When
-        URLParametersEncoder.encode(nil, into: &request)
-        let urlComponents = try XCTUnwrap(URLComponents(url: request.url!, resolvingAgainstBaseURL: false))
-        let encodedQueryItems = urlComponents.queryItems
-
-        // Then
-        XCTAssertNil(encodedQueryItems)
+        try assertQueryItemsEquality(parameters: nil)
     }
 
     func testQueryItemsPropertyOfRequestIsEmptyArrayWhenEmptyDictionaryIsPassedAsParameters() throws {
-        // Given
-        let parameters = [String: String]()
-
-        // When
-        URLParametersEncoder.encode(parameters, into: &request)
-        let urlComponents = try XCTUnwrap(URLComponents(url: request.url!, resolvingAgainstBaseURL: false))
-        let encodedQueryItems = urlComponents.queryItems
-
-        // Then
-        XCTAssertEqual(encodedQueryItems, [])
+        try assertQueryItemsEquality(parameters: [:])
     }
 
     func testQueryItemsPropertyOfRequestHasExpectedValueWhenPassedOneKeyValuePairOfURLParameters() throws {
-        // Given
-        let parameters = ["a": "b"]
-        let passedQueryItems = try XCTUnwrap(queryItems(from: parameters))
-
-        // When
-        URLParametersEncoder.encode(parameters, into: &request)
-        let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
-        let encodedQueryItems = try XCTUnwrap(components?.queryItems)
-
-        // Then
-        XCTAssertEqual(Set(passedQueryItems), Set(encodedQueryItems))
+        try assertQueryItemsEquality(parameters: ["a": "b"])
     }
 
     func testQueryItemsPropertyOfRequestHasExpectedValueWhenKeyOfPassedURLParametersIsEmpty() throws {
-        // Given
-        let parameters = ["": "a"]
-        let passedQueryItems = try XCTUnwrap(queryItems(from: parameters))
-
-        // When
-        URLParametersEncoder.encode(parameters, into: &request)
-        let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
-        let encodedQueryItems = try XCTUnwrap(components?.queryItems)
-
-        // Then
-        XCTAssertEqual(Set(passedQueryItems), Set(encodedQueryItems))
+        try assertQueryItemsEquality(parameters: ["": "a"])
     }
 
     func testQueryItemsPropertyOfRequestHasExpectedValueWhenValueOfPassedURLParametersIsEmpty() throws {
-        // Given
-        let parameters = ["a": ""]
-        let passedQueryItems = try XCTUnwrap(queryItems(from: parameters))
-
-        // When
-        URLParametersEncoder.encode(parameters, into: &request)
-        let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
-        let encodedQueryItems = try XCTUnwrap(components?.queryItems)
-
-        // Then
-        XCTAssertEqual(Set(passedQueryItems), Set(encodedQueryItems))
+        try assertQueryItemsEquality(parameters: ["a": ""])
     }
 
-    func testQueryItemsPropertyOfRequestHasExpectedValueWhenPassedMultipleParametersContainEmptyStrings() throws {
+    func testQueryItemsPropertyOfRequestHasExpectedValueWhenPassedMultipleParameters() throws {
         // Given
         let parameters = [
             "  ": "  ",
             "": "",
             " ": " ",
         ]
-        let passedQueryItems = try XCTUnwrap(queryItems(from: parameters))
 
-        // When
-        URLParametersEncoder.encode(parameters, into: &request)
-        let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)
-        let encodedQueryItems = try XCTUnwrap(components?.queryItems)
-
-        // Then
-        XCTAssertEqual(Set(passedQueryItems), Set(encodedQueryItems))
+        // When // Then
+        try assertQueryItemsEquality(parameters: parameters)
     }
 
     // MARK: - Private interface
 
-    private func queryItems(from parameters: [String: String]) -> [URLQueryItem] {
-        parameters.map { key, value in
+    private func assertQueryItemsEquality(parameters: URLParameters?) throws {
+        let expectedQueryItems = queryItems(from: parameters)
+
+        URLParametersEncoder.encode(parameters, into: &request)
+        let components = try XCTUnwrap(URLComponents(url: request.url!, resolvingAgainstBaseURL: false))
+        let actualQueryItems = components.queryItems
+
+        XCTAssertEqual(actualQueryItems, expectedQueryItems)
+    }
+
+    private func queryItems(from parameters: URLParameters?) -> [URLQueryItem]? {
+        guard let parameters else { return nil }
+        return parameters.map { key, value in
             URLQueryItem(name: key, value: value)
         }
     }
