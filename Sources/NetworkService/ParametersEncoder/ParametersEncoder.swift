@@ -1,13 +1,11 @@
 import Foundation
 
-/// A protocol for encoding URL parameters into an `URLRequest`.
+/// A type that encodes URL parameters into a request.
 public protocol ParametersEncoder {
-    /**
-     Encodes URL parameters into the provided `URLRequest`.
-     
-     - Parameters:
-        - parameters: An optional `URLParameters` object containing the data to be encoded.
-        - request: An `inout` `URLRequest` object to which the encoded URL will be assigned.
-    */
+    /// Encodes provided set of parameters as URL parameters into the given request's URL.
+    ///
+    /// - Parameters:
+    ///  - parameters: An optional set of URL parameters to be encoded.
+    ///  - request: A request object to which URL the encoded parameters will be assigned.
     static func encode(_ parameters: URLParameters?, into request: inout URLRequest)
 }
