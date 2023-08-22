@@ -18,4 +18,13 @@ final class NetworkServiceInternalErrorTests: XCTestCase {
     func testNetworkServiceInternalErrorConformsToErrorProtocol() {
         XCTAssertNotNil(NetworkServiceInternalError.self as Error.Type)
     }
+    
+    func testLocalizedDescriptionReturnExpectedStringForAllNetworkServiceInternalErrors() {
+        NetworkServiceInternalError.allCases.forEach { error in
+            switch error {
+            case .serializationFailure:
+                XCTAssertEqual(error.localizedDescription, "The provided data can not be serialized.")
+            }
+        }
+    }
 }
