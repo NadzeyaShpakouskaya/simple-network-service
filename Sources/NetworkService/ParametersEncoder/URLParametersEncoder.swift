@@ -1,6 +1,14 @@
 import Foundation
-
+/// Encodes URL parameters into the request's URL.
 public struct URLParametersEncoder: ParametersEncoder {
+    /// Encodes provided set of URL parameters as into the given request's URL. In the result,
+    /// the provided set of URL parameters gets the query string of the request's URL.
+    ///
+    /// If the `nil` is submitted as parameters, the request's URL retains the original value.
+    ///
+    /// - Parameters:
+    ///  - parameters: An optional set of URL parameters to be encoded.
+    ///  - request: A2 request object to which URL the encoded parameters will be assigned.
     public static func encode(_ parameters: URLParameters?, into request: inout URLRequest) {
         guard let url = request.url, let parameters = parameters else { return }
 
@@ -10,7 +18,14 @@ public struct URLParametersEncoder: ParametersEncoder {
         request.url = urlComponents?.url
     }
 
-    private static func queryItems(from parameters: URLParameters) -> [URLQueryItem] {
+    /// Create a collection of query items from the provided set of URL parameters. Each key-value
+    /// pair of URL parameters corresponds to a query item, where the key is the query item's name
+    /// and the value is the query item's value.
+    ///
+    /// - Parameter parameters: The set of URL parameters to be converted to query items.
+    /// - Returns: The collection of resulting query items.
+    /// - Complexity: O(*N*), where *N* is the length of the set of parameters.
+    public static func queryItems(from parameters: URLParameters) -> [URLQueryItem] {
         parameters.map { key, value in
             URLQueryItem(
                 name: key,

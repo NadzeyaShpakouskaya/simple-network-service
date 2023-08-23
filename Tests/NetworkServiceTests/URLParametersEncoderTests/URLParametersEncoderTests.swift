@@ -50,19 +50,15 @@ final class URLParametersEncoderTests: XCTestCase {
     // MARK: - Private interface
 
     private func assertQueryItemsEquality(parameters: URLParameters?) throws {
-        let expectedQueryItems = queryItems(from: parameters)
-
         URLParametersEncoder.encode(parameters, into: &request)
         let components = try XCTUnwrap(URLComponents(url: request.url!, resolvingAgainstBaseURL: false))
         let actualQueryItems = components.queryItems
 
-        XCTAssertEqual(actualQueryItems, expectedQueryItems)
-    }
-
-    private func queryItems(from parameters: URLParameters?) -> [URLQueryItem]? {
-        guard let parameters else { return nil }
-        return parameters.map { key, value in
-            URLQueryItem(name: key, value: value)
+        if let parameters {
+            let expectedQueryItems = URLParametersEncoder.queryItems(from: parameters)
+            XCTAssertEqual(actualQueryItems, expectedQueryItems)
+        } else {
+            XCTAssertNil(actualQueryItems)
         }
     }
 }
