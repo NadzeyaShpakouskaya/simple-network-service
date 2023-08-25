@@ -1,14 +1,14 @@
 import Foundation
 /// Encodes URL parameters into the request's URL.
 public struct URLParametersEncoder: ParametersEncoder {
-    /// Encodes provided set of URL parameters as into the given request's URL. In the result,
-    /// the provided set of URL parameters gets the query string of the request's URL.
+    /// Encodes the provided set of URL parameters into the given request's URL.
     ///
+    /// In the result, the provided set of URL parameters gets the query string of the request's URL.
     /// If the `nil` is submitted as parameters, the request's URL retains the original value.
     ///
     /// - Parameters:
-    ///  - parameters: An optional set of URL parameters to be encoded.
-    ///  - request: A2 request object to which URL the encoded parameters will be assigned.
+    ///   - parameters: An optional set of URL parameters to be encoded.
+    ///   - request: The request object to which URL the encoded parameters will be assigned.
     public static func encode(_ parameters: URLParameters?, into request: inout URLRequest) {
         guard let url = request.url, let parameters = parameters else { return }
 
