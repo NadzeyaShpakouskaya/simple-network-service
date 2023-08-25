@@ -1,7 +1,7 @@
 import NetworkService
 import XCTest
 
-final class URLParametersEncoderTests: XCTestCase {
+final class EncodeTests: XCTestCase {
     let testURL = Bundle.main.bundleURL
     var request: URLRequest!
 
@@ -51,7 +51,8 @@ final class URLParametersEncoderTests: XCTestCase {
 
     private func assertQueryItemsEquality(parameters: URLParameters?) throws {
         URLParametersEncoder.encode(parameters, into: &request)
-        let components = try XCTUnwrap(URLComponents(url: request.url!, resolvingAgainstBaseURL: false))
+        let url = try XCTUnwrap(request.url)
+        let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
         let actualQueryItems = components.queryItems
 
         if let parameters {
