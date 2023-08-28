@@ -18,9 +18,7 @@ public struct URLParametersEncoder: ParametersEncoder {
         request.url = urlComponents?.url
     }
 
-    /// Create a collection of query items from the provided set of URL parameters. Each key-value
-    /// pair of URL parameters corresponds to a query item, where the key is the query item's name
-    /// and the value is the query item's value.
+    /// Create a collection of query items from the provided set of URL parameters.
     ///
     /// - Parameter parameters: The set of URL parameters to be converted to query items.
     /// - Returns: The collection of resulting query items.
