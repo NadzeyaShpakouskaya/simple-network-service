@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added 
 
+- Add implementation of the `NetworkService`, `NetworkRouter` protocol - [#14](https://github.com/ios-course/simple-network-service/pull/14)
 - Add `NetworkError` enum - [#4](https://github.com/ios-course/simple-network-service/pull/4)
 - Add `HTTPMethod`, `HTTPTask` enums, `HTTPAPIEndpoint` protocol, `HTTPHeaders`, `BodyParameters`, `URLParameters` type aliases - [#2](https://github.com/ios-course/simple-network-service/pull/2)
 - Add `BodyEncoder` protocol, `JSONBodyEncoder` implementation - [#13](https://github.com/ios-course/simple-network-service/pull/13)
