@@ -15,12 +15,8 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
     
     // MARK: - Private interface
     
-    /// The current URLSessionTask for the network request.
     private var task: URLSessionTask?
-    
-    /// Creates a URLRequest from the specified endpoint.
-    /// - Parameter route: The endpoint for which the URLRequest is to be created.
-    /// - Returns: A URLRequest object representing the request to the endpoint.
+
     private func request(from route: Endpoint) -> URLRequest {
         var request = URLRequest(
             url: route.baseURL.appendingPathComponent(route.path),
@@ -49,9 +45,6 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
         return request
     }
     
-    /// Sends the specified URLRequest and handles the response.
-    /// - Parameter request: The URLRequest to be sent.
-    /// - Returns: A `Result` object containing either the received data or an error in case of failure.
     private func send(_ request: URLRequest) async -> Result<Data, Error> {
         do {
             let (rawData, response) = try await URLSession.shared.data(for: request)
@@ -66,9 +59,6 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
         }
     }
     
-    /// Handles the received URLResponse and determines the result of the network request.
-    /// - Parameter response: The URLResponse received from the server.
-    /// - Returns: A `Result` object containing either success or an error based on the response status code.
     private func handle(_ response: URLResponse) -> Result<Void, Error> {
         guard let httpResponse = response as? HTTPURLResponse else {
             return .failure(NetworkError.badResponse)

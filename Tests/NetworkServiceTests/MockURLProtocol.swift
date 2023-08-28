@@ -1,7 +1,9 @@
 import Foundation
 
+/// A custom URL protocol used for mocking network responses during testing.
 class MockURLProtocol: URLProtocol {
     
+    /// Handles incoming requests and returns mocked responses.
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
     
     override class func canInit(with request: URLRequest) -> Bool {

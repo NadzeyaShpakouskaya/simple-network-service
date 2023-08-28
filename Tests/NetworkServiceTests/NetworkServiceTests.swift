@@ -23,7 +23,7 @@ final class NetworkServiceTests: XCTestCase {
         networkService = nil
     }
     
-    func testSuccessfulRequest() async throws {
+    func testSuccessfulRequestReturnsExpectedData() async throws {
         // Given
         let expectedData = "Mocked Response Data".data(using: .utf8)!
         MockURLProtocol.requestHandler = { request in
@@ -45,7 +45,7 @@ final class NetworkServiceTests: XCTestCase {
         }
     }
     
-    func testBadRequest() async throws {
+    func testBadRequestReturnsFailure() async throws {
         // Given
         MockURLProtocol.requestHandler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)!
@@ -66,7 +66,7 @@ final class NetworkServiceTests: XCTestCase {
         }
     }
     
-    func testRequestWithURLParameters() async throws {
+    func testRequestWithURLParametersReturnsExpectedData() async throws {
         // Given
         let expectedData = "Mocked Response Data with URL Parameters".data(using: .utf8)!
         MockURLProtocol.requestHandler = { request in
@@ -89,7 +89,7 @@ final class NetworkServiceTests: XCTestCase {
         }
     }
     
-    func testRequestWithBodyParameters() async throws {
+    func testRequestWithBodyParametersReturnsExpectedData() async throws {
         // Given
         let expectedData = "Mocked Response Data with Body Parameters".data(using: .utf8)!
         MockURLProtocol.requestHandler = { request in
