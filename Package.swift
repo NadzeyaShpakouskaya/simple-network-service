@@ -17,7 +17,7 @@ let package = Package(
             targets: [
                 networkServiceTargetName,
             ]
-        ),
+        )
     ],
     dependencies: [],
     targets: [
@@ -30,6 +30,6 @@ let package = Package(
             dependencies: [
                 .target(name: networkServiceTargetName),
             ]
-        ),
+        )
     ]
 )

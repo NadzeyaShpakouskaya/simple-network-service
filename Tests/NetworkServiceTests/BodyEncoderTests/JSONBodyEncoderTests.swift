@@ -20,17 +20,22 @@ final class JSONBodyEncoderTests: XCTestCase {
     }
 
     func testEncodeAddedExpectedBodyParameters() throws {
+        // Given
         let addingParameters = ["test": "param"]
         let expectedData = try JSONEncoder().encode(addingParameters)
 
+        // When
         try JSONBodyEncoder.encode(addingParameters, into: &request)
 
-        let existingBody = request.httpBody
-        XCTAssertEqual(expectedData, existingBody)
+        // Then
+        XCTAssertEqual(expectedData, request.httpBody)
     }
 
     func testRequestBodyIsNilWhenEncodesMethodCalledWithNilAsBodyParameters() throws {
+        // Given // When
         try JSONBodyEncoder.encode(nil, into: &request)
+        
+        // Then
         XCTAssertNil(request.httpBody)
     }
 }
