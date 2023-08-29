@@ -53,8 +53,10 @@ final class QueryItemsTests: XCTestCase {
         ]
         let threeUrlParameters = [
             "": "",
-            " ": " ",
-            "a": "a",
+            " ": "",
+            "a": "",
+            "b": "",
+            "c": "",
         ]
 
         // When
@@ -63,6 +65,6 @@ final class QueryItemsTests: XCTestCase {
 
         // Then
         XCTAssertEqual(queryItemsCountForTwoUrlParameters, 2)
-        XCTAssertEqual(queryItemsCountForThreeUrlParameters, 3)
+        XCTAssertEqual(queryItemsCountForThreeUrlParameters, 5)
     }
 }
