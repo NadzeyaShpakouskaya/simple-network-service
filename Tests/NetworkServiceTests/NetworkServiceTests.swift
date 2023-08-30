@@ -32,11 +32,11 @@ final class NetworkServiceTests: XCTestCase {
         XCTAssertEqual(data, expectedData)
     }
     
-    func ttestBadRequestStatusCodeInResponseTriggersBadRequestError() async throws {
+    func testBadRequestStatusCodeInResponseTriggersBadRequestError() async throws {
         // Given
         MockURLProtocol.requestHandler = { _ in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")), statusCode: 400, httpVersion: nil, headerFields: nil))
-            return (response, Data())
+            return (response, nil)
         }
         
         let endpoint = MockEndpoint()
