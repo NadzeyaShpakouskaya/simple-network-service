@@ -10,7 +10,7 @@ public struct URLParametersEncoder: ParametersEncoder {
     ///   - parameters: An optional set of URL parameters to be encoded.
     ///   - request: The request object to which URL the encoded parameters will be assigned.
     public static func encode(_ parameters: URLParameters?, into request: inout URLRequest) {
-        guard let url = request.url, let parameters = parameters else { return }
+        guard let url = request.url, let parameters else { return }
 
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems(from: parameters)
