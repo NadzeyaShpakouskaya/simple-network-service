@@ -18,8 +18,8 @@ final class NetworkServiceTests: XCTestCase {
     func testSuccessfulRequestReturnsExpectedData() async throws {
         // Given
         let expectedData = try XCTUnwrap("Mocked Response Data".data(using: .utf8))
-        MockURLProtocol.requestHandler = { _ in
-            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")), statusCode: 200, httpVersion: nil, headerFields: nil))
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 200, httpVersion: nil, headerFields: nil))
             return (response, expectedData)
         }
         
@@ -34,8 +34,8 @@ final class NetworkServiceTests: XCTestCase {
     
     func testBadRequestStatusCodeInResponseTriggersBadRequestError() async throws {
         // Given
-        MockURLProtocol.requestHandler = { _ in
-            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")), statusCode: 400, httpVersion: nil, headerFields: nil))
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 400, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
@@ -52,20 +52,100 @@ final class NetworkServiceTests: XCTestCase {
         }
     }
     
+    func testAuthenticationErrorStatusCodeInResponseTriggersAuthenticationError() async throws {
+        // Given
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 401, httpVersion: nil, headerFields: nil))
+            return (response, nil)
+        }
+        
+        let endpoint = MockEndpoint()
+        
+        // When
+        do {
+            _ = try await networkService.request(endpoint)
+            XCTFail("Expected failure, but got success")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .authenticationError)
+        } catch {
+            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+        }
+    }
+    
+    func testClientErrorStatusCodeInResponseTriggersClientError() async throws {
+        // Given
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 402, httpVersion: nil, headerFields: nil))
+            return (response, nil)
+        }
+        
+        let endpoint = MockEndpoint()
+        
+        // When
+        do {
+            _ = try await networkService.request(endpoint)
+            XCTFail("Expected failure, but got success")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .clientError)
+        } catch {
+            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+        }
+    }
+    
+    func testServerErrorStatusCodeInResponseTriggersServerError() async throws {
+        // Given
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 500, httpVersion: nil, headerFields: nil))
+            return (response, nil)
+        }
+        
+        let endpoint = MockEndpoint()
+        
+        // When
+        do {
+            _ = try await networkService.request(endpoint)
+            XCTFail("Expected failure, but got success")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .serverError)
+        } catch {
+            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+        }
+    }
+    
+    func testUnknownErrorStatusCodeInResponseTriggersUnknownError() async throws {
+        // Given
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 300, httpVersion: nil, headerFields: nil))
+            return (response, nil)
+        }
+        
+        let endpoint = MockEndpoint()
+        
+        // When
+        do {
+            _ = try await networkService.request(endpoint)
+            XCTFail("Expected failure, but got success")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .unknownError)
+        } catch {
+            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+        }
+    }
+    
     func testRequestWithURLParametersReturnsExpectedData() async throws {
         // Given
         let expectedData = try XCTUnwrap("Mocked Response Data with URL Parameters".data(using: .utf8))
-        MockURLProtocol.requestHandler = { _ in
-            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")), statusCode: 200, httpVersion: nil, headerFields: nil))
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 200, httpVersion: nil, headerFields: nil))
             return (response, expectedData)
         }
-        
+
         var endpoint = MockEndpoint()
         endpoint.task = .requestWithURLParameters(urlParameters: ["key": "value"])
-        
+
         // When
         let data = try await networkService.request(endpoint)
-        
+
         // Then
         XCTAssertEqual(data, expectedData)
     }
@@ -73,8 +153,8 @@ final class NetworkServiceTests: XCTestCase {
     func testRequestWithBodyParametersReturnsExpectedData() async throws {
         // Given
         let expectedData = try XCTUnwrap("Mocked Response Data with Body Parameters".data(using: .utf8))
-        MockURLProtocol.requestHandler = { _ in
-            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")), statusCode: 200, httpVersion: nil, headerFields: nil))
+        MockURLProtocol.requestHandler = { request in
+            let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 200, httpVersion: nil, headerFields: nil))
             return (response, expectedData)
         }
         

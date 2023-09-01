@@ -54,7 +54,6 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
         }
     }
     
-    
     private func handle(_ response: URLResponse) -> Result<Void, Error> {
         guard let httpResponse = response as? HTTPURLResponse else {
             return .failure(NetworkError.badResponse)
