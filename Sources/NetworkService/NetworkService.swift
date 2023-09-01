@@ -7,6 +7,9 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
     /// The default timeout interval (in seconds) for network requests.
     public var defaultTimeoutIntervalInSeconds: TimeInterval = 10.0
     
+    /// Initializes a new instance of the `NetworkService` class.
+    public init() {}
+    
     /// Sends a network request to the specified server endpoint.
     ///
     /// - Parameter route: The endpoint configuration containing all the necessary details of
