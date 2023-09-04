@@ -34,7 +34,7 @@ final class JSONBodyEncoderTests: XCTestCase {
     func testRequestBodyIsNilWhenEncodesMethodCalledWithNilAsBodyParameters() throws {
         // Given // When
         try JSONBodyEncoder.encode(nil, into: &request)
-        
+
         // Then
         XCTAssertNil(request.httpBody)
     }

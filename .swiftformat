@@ -1,0 +1,15 @@
+# format options
+--funcattributes same-line
+--ranges no-space
+
+# rules enabled
+--enable wrapEnumCases
+
+# rules disabled
+--disable andOperator
+--disable redundantPattern
+--disable redundantLet
+--disable wrapMultilineStatementBraces
+
+# min swift format version
+--minversion 0.51.7

@@ -1,0 +1,11 @@
+identifier_name:
+    excluded: ["id", "a", "b", "c", "i", "j", "x", "y", "z"]
+
+disabled_rules:
+    - redundant_discardable_let
+
+trailing_comma:
+    mandatory_comma: true
+
+opt_in_rules:
+  - force_unwrapping
