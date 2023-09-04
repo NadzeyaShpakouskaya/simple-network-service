@@ -8,7 +8,7 @@ final class NetworkServiceInternalErrorTests: XCTestCase {
 
         // When
         let expectedErrors: Set<NetworkServiceInternalError> = [
-            .serializationFailure
+            .serializationFailure,
         ]
 
         // Then
@@ -18,7 +18,7 @@ final class NetworkServiceInternalErrorTests: XCTestCase {
     func testNetworkServiceInternalErrorConformsToErrorProtocol() {
         XCTAssertNotNil(NetworkServiceInternalError.self as Error.Type)
     }
-    
+
     func testLocalizedDescriptionReturnExpectedStringForAllNetworkServiceInternalErrors() {
         NetworkServiceInternalError.allCases.forEach { error in
             switch error {
