@@ -3,17 +3,25 @@ import NetworkService
 
 final class NetworkServiceTests: XCTestCase {
     
-    var networkService: NetworkService<MockEndpoint>!
+    // MARK: - Private interface
+    
+    private var endpoint = MockEndpoint()
+    private var networkService: NetworkService<MockEndpoint>!
+    
+    // MARK: - Tests preparation
     
     override func setUpWithError() throws {
         networkService = NetworkService()
         URLProtocol.registerClass(MockURLProtocol.self)
+        endpoint = MockEndpoint()
     }
     
     override func tearDownWithError() throws {
         URLProtocol.unregisterClass(MockURLProtocol.self)
         networkService = nil
     }
+    
+    // MARK: - Tests
     
     func testSuccessfulRequestReturnsExpectedData() async throws {
         // Given
@@ -23,8 +31,6 @@ final class NetworkServiceTests: XCTestCase {
             return (response, expectedData)
         }
         
-        let endpoint = MockEndpoint()
-        
         // When
         let data = try await networkService.request(endpoint)
         
@@ -33,102 +39,92 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func testBadRequestStatusCodeInResponseTriggersBadRequestError() async throws {
-        // Given
+        // Given // When
         MockURLProtocol.requestHandler = { request in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 400, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
-        let endpoint = MockEndpoint()
-        
-        // When
+        // Then
         do {
             _ = try await networkService.request(endpoint)
             XCTFail("Expected failure, but got success")
         } catch let error as NetworkError {
             XCTAssertEqual(error, .badRequest)
         } catch {
-            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
     func testAuthenticationErrorStatusCodeInResponseTriggersAuthenticationError() async throws {
-        // Given
+        // Given // When
         MockURLProtocol.requestHandler = { request in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 401, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
-        let endpoint = MockEndpoint()
-        
-        // When
+        // Then
         do {
             _ = try await networkService.request(endpoint)
             XCTFail("Expected failure, but got success")
         } catch let error as NetworkError {
             XCTAssertEqual(error, .authenticationError)
         } catch {
-            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
     func testClientErrorStatusCodeInResponseTriggersClientError() async throws {
-        // Given
+        // Given // When
         MockURLProtocol.requestHandler = { request in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 402, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
-        let endpoint = MockEndpoint()
-        
-        // When
+        // Then
         do {
             _ = try await networkService.request(endpoint)
             XCTFail("Expected failure, but got success")
         } catch let error as NetworkError {
             XCTAssertEqual(error, .clientError)
         } catch {
-            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
     func testServerErrorStatusCodeInResponseTriggersServerError() async throws {
-        // Given
+        // Given // When
         MockURLProtocol.requestHandler = { request in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 500, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
-        let endpoint = MockEndpoint()
-        
-        // When
+        // Then
         do {
             _ = try await networkService.request(endpoint)
             XCTFail("Expected failure, but got success")
         } catch let error as NetworkError {
             XCTAssertEqual(error, .serverError)
         } catch {
-            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
     func testUnknownErrorStatusCodeInResponseTriggersUnknownError() async throws {
-        // Given
+        // Given // When
         MockURLProtocol.requestHandler = { request in
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 300, httpVersion: nil, headerFields: nil))
             return (response, nil)
         }
         
-        let endpoint = MockEndpoint()
-        
-        // When
+        // Then
         do {
             _ = try await networkService.request(endpoint)
             XCTFail("Expected failure, but got success")
         } catch let error as NetworkError {
             XCTAssertEqual(error, .unknownError)
         } catch {
-            XCTFail("Expected NetworkError.badRequest, but got \(error)")
+            XCTFail("Unexpected error: \(error)")
         }
     }
     
@@ -139,8 +135,6 @@ final class NetworkServiceTests: XCTestCase {
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 200, httpVersion: nil, headerFields: nil))
             return (response, expectedData)
         }
-
-        var endpoint = MockEndpoint()
         endpoint.task = .requestWithURLParameters(urlParameters: ["key": "value"])
 
         // When
@@ -157,8 +151,6 @@ final class NetworkServiceTests: XCTestCase {
             let response = try XCTUnwrap(HTTPURLResponse(url: XCTUnwrap(request.url), statusCode: 200, httpVersion: nil, headerFields: nil))
             return (response, expectedData)
         }
-        
-        var endpoint = MockEndpoint()
         endpoint.task = .requestWithBodyParameters(bodyParameters: ["key": "value"])
         
         // When
