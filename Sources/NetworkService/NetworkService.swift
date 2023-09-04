@@ -50,6 +50,7 @@ public final class NetworkService<Endpoint: HTTPAPIEndpoint>: NetworkRouter {
     private func send(_ request: URLRequest) async throws -> Data {
         let (rawData, response) = try await URLSession.shared.data(for: request)
         switch handle(response) {
+        // swiftlint:disable:next empty_enum_arguments
         case .success(_):
             return rawData
         case let .failure(error):
