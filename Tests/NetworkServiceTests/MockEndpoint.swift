@@ -1,5 +1,5 @@
-import NetworkService
 import Foundation
+import NetworkService
 
 /// Represents a mock HTTP API endpoint for testing purposes.
 struct MockEndpoint: HTTPAPIEndpoint {
